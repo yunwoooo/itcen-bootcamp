@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>이벤트 모델-인라인</h1>
+	<hr>
+	<button onclick="changeColor('red')">빨강색</button>
+    <button onclick="changeColor('blue')">파랑색</button>
+    <button onclick="changeColor('yellow')">노랑색</button>
+    <hr>
+    <h3 id = "today"></h3>
+    
+    <script>
+    	const date = new Date();
+    	const today = document.getElementById("today");
+    	today.textContent = "오늘은 " + (date.getMonth() + 1) + "월 " + date.getDate() + "일입니다.";
+    	
+    	function changeColor(color) {
+    		today.style.color = color;
+        }
+    </script>
+</body>
+</html>

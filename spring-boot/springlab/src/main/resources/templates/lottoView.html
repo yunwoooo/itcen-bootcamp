@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>로또 결과</h1>
+    <hr>
+    <h2 style='color:red'> [[${ result }]] </h2>
+    <img th:src= "@{../images/{name}.png(name=${imgName})}" height="300px">
+    <hr>
+    <p th:if="${refinfo}">
+        <a th:href="${refinfo}">재시도....</a>
+    </p>
+</body>
+</html>

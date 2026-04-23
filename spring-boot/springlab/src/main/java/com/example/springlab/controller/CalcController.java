@@ -14,6 +14,7 @@ public class CalcController {
         int result = 0;
         mav.addObject("refinfo", req.getHeader("referer"));
         if (oper.equals("/") && num2 == 0) {
+            mav.addObject("message", "나눗셈 연산시 두 번째 숫자는 0일 수 없습니다!!");
             mav.setViewName("errorResult");
             return mav;
         }

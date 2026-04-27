@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>우리팀 소개</title>
+</head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+And+White+Picture&family=Gugi&display=swap" rel="stylesheet">
+<style>
+    body, button {
+        font-family: "Black And White Picture", system-ui;
+    }
+</style>
+
+<body>
+    <h1>우리팀 소개</h1>
+    <hr>
+    <button onclick="teamName()">우리 팀명</button>
+    <button onclick="teamMember()">우리 팀원</button>
+    <output id="result"></output>
+
+    <script>
+        function teamName() {
+            let xhr = new XMLHttpRequest();
+            xhr.onload = function() {
+                if (xhr.status == 200) {
+                    let json = JSON.parse(xhr.responseText);
+                    let result = document.getElementById("result");
+                    result.innerHTML = "<h1>우리 팀의 팀명은 " + json.teamName + "입니다.</h1>"
+                }
+            };
+            xhr.open('GET', '/myTeam2?request=팀명', true);
+            xhr.send();
+        }
+        function teamMember() {
+            let xhr = new XMLHttpRequest();
+            xhr.onload = function() {
+                if (xhr.status == 200) {
+                    let json = JSON.parse(xhr.responseText);
+                    let result = document.getElementById("result");
+                    let html = "<h1>" + json.teamName + "의 팀원들을 소개합니다.</h1><ul>";
+                    json.teamMember.forEach(function (member) {
+                        html += "<li>" + member.name + ": 별명은 " + member.nicName
+                            + "이고 좋아하는 음식은 " + member.food + "입니다.</li>";
+                    });
+                    html += "</ul>";
+
+                    result.innerHTML = html;
+                }
+            };
+            xhr.open('GET', '/myTeam2?request=팀원', true);
+            xhr.send();
+        }
+    </script>
+
+</body>
+</html>

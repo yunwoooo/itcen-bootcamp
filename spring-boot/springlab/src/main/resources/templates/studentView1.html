@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<th:block th:if="${list}">
+    <ul>
+        <th:block th:each="student : ${list}">
+            <li>[[${student}]]</li>
+        </th:block>
+    </ul>
+</th:block>
+
+<th:block th:if="${msg}">
+    <h2>[[${ msg }]]</h2>
+</th:block>
+
+<th:block th:if="${num}">
+    <h2>전체 학생의 평균은 [[${ num }]]점이군요..</h2>
+</th:block>
+</body>
+</html>

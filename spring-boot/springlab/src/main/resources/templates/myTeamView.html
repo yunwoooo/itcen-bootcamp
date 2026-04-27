@@ -23,6 +23,7 @@
         <button>우리 팀원</button>
     </a>
 
+
     <div th:if="${myteam.getTeamName() != null and myteam.getTeamMember() == null}">
         <h2 th:text="|우리 팀의 팀명은 ${myteam.getTeamName()}입니다.|"></h2>
     </div>

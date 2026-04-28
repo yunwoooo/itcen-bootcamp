@@ -83,10 +83,14 @@ public class StudentController1 {
     @RequestMapping(value = "/insert")
     public ModelAndView insertStudent(StudentDTO dto) {
         ModelAndView mav = new ModelAndView();
-        boolean result = st.insertStudent(dto);
-        if (result) {
-            mav.addObject("list", st.listAll());
-        } else {
+        try {
+            boolean result = st.insertStudent(dto);
+            if (result) {
+                mav.addObject("list", st.listAll());
+            } else {
+                mav.addObject("insert_msg", "학생 등록에 실패했습니다.");
+            }
+        } catch (Exception e) {
             mav.addObject("insert_msg", "학생 등록에 실패했습니다.");
         }
         mav.setViewName("studentView1");

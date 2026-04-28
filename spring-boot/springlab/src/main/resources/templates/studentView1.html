@@ -17,8 +17,8 @@
 
 </head>
 <body>
-<table th:if="${list}">
-    <h1> 학생 정보 리스트 </h1>
+<h1 th:if="${list != null and insert_msg == null}"> 학생 정보 리스트 </h1>
+<table th:if="${list != null and insert_msg == null}">
     <tr th:each="student : ${list}">
         <td>[[${student.getName()}]]</td>
         <td>[[${student.getScore()}]]</td>
@@ -26,32 +26,35 @@
     </tr>
 </table>
 
-<th:block th:if="${num}">
+<th:block th:if="${num != null and insert_msg == null}">
     <h2>전체 학생의 평균은 [[${ num }]]점이군요..</h2>
 </th:block>
 
-<th:block th:if="${msg}">
+<th:block th:if="${msg != null and insert_msg == null}">
     <h2>[[${ msg }]]</h2>
 </th:block>
 
-<th:block th:if="${delete_msg}">
+<th:block th:if="${delete_msg != null and insert_msg == null}">
     <h2>[[${ delete_msg }]]</h2>
     <a th:href="@{/test1}">전체학생보기</a>
     <br>
 </th:block>
 
 <th:block th:if="${insert_msg}">
-    <script>console.log(insert_msg)</script>
+    <script>alert('[[${insert_msg}]]')</script>
 </th:block>
 
-<a href="#" onclick="document.getElementById('insertform').style.display='block'"> 학생정보입력 </a>
+<a th:if="${insert_msg == null}"
+   href="#" onclick="document.getElementById('insertform').style.display='block'">
+    학생정보입력
+</a>
 
-<div id="insertform" style="display: none">
+<div id="insertform" th:style="${insert_msg != null} ? 'display:block' : 'display:none'">
         <form method = "post" action = "/insert">
             <input type ="text" name ="name"
                    placeholder="이름을 입력하세요"required><br>
             <input type ="number" name ="score"
-                   placeholder="점수를 입력하세요"required min="1" max="100"><br>
+                   placeholder="점수를 입력하세요"required min="0" max="100"><br>
             <input type = "submit" value = "등록">
             <input type = "reset" value = "재작성">
             <input type = "button" value = "취소" onclick="document.getElementById('insertform').style.display='none'">

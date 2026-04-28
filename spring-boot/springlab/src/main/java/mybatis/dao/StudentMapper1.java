@@ -1,6 +1,8 @@
 package mybatis.dao;
 
 import com.example.springlab.domain.StudentDTO;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -25,4 +27,10 @@ public interface StudentMapper1 {
 
     @Select("select avg(score) from student")
     public double getScoreAvg();
+
+    @Insert("insert into student (name, score) values (#{name}, #{score})")
+    public boolean insertStudent(StudentDTO dto);
+
+    @Delete("delete from student where name = #{name}")
+    public boolean deleteStudent(String name);
 }
